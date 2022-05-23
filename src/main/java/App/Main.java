@@ -5,16 +5,22 @@ import ru.test.spring.Cart;
 import ru.test.spring.Product;
 import ru.test.spring.ProductRepository;
 
+import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Scanner;
 
 @ComponentScan("ru.test.spring")
 public class Main {
+    private static final ProductRepository productRepository = new ProductRepository();
+    private static final Cart cart = new Cart();
+    @PostConstruct
+
     public static void main(String[] args) {
-       ProductRepository productRepository = new ProductRepository();
-       Cart cart = new Cart();
         cart.addProduct(productRepository.findById(666L));
+        console();
+    }
+    public static void console(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Если хотите посмотреть список команд введите help ");
         while (true) {
